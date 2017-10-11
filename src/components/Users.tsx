@@ -42,11 +42,10 @@ export default class extends React.Component {
         <ReactTable
           data={this.state.users}
           columns={[
-            { Header: 'ID', accessor: 'id', width: 200 },
             { Header: 'Username', accessor: 'userName' },
             { Header: 'Email', accessor: 'email' },
             { Header: 'Role', accessor: 'role' },
-            { Header: 'Statue', accessor: 'status' },
+            { Header: 'Status', accessor: 'status' },
           ]}
         />
       </div>
