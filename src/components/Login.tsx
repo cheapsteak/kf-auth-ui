@@ -44,28 +44,32 @@ class Component extends React.Component {
   };
 
   componentDidMount() {
-    gapi.load('auth2', () => {
-      /**
+    try {
+      gapi.load('auth2', () => {
+        /**
        * Retrieve the singleton for the GoogleAuth library and set up the
        * client.
        */
-      gapi.auth2.init({
-        client_id: GOOGLE_CLIENT_ID,
-      });
+        gapi.auth2.init({
+          client_id: GOOGLE_CLIENT_ID,
+        });
 
-      gapi.signin2.render('googleSignin', {
-        scope: 'profile email',
-        width: 240,
-        height: 40,
-        longtitle: true,
-        theme: 'light',
-        onsuccess: googleUser => {
-          const { id_token } = googleUser.getAuthResponse();
-          this.handleGoogleToken(id_token);
-        },
-        onfailure: error => console.log('login fail', error),
+        gapi.signin2.render('googleSignin', {
+          scope: 'profile email',
+          width: 240,
+          height: 40,
+          longtitle: true,
+          theme: 'light',
+          onsuccess: googleUser => {
+            const { id_token } = googleUser.getAuthResponse();
+            this.handleGoogleToken(id_token);
+          },
+          onfailure: error => console.log('login fail', error),
+        });
       });
-    });
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   handleGoogleToken = async token => {

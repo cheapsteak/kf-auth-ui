@@ -9,7 +9,7 @@ export const googleLogin = token =>
 export const googleLogout = () => {
   const authInstance = gapi.auth2.getAuthInstance();
   if (authInstance) {
-    return gapi.signOut();
+    return authInstance.signOut();
   } else {
     // already signed out
     return Promise.resolve();

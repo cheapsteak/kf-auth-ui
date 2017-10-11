@@ -4,11 +4,12 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import colors from 'common/colors';
 import { getUsers } from 'services';
-import Logout from 'components/Logout';
+import Nav from 'components/Nav';
 
 const styles = {
   container: {
-    backgroundColor: colors.purple,
+    // backgroundColor: colors.purple,
+    backgroundColor: colors.lightGrey,
     color: '#fff',
     display: 'flex',
     flexDirection: 'column',
@@ -22,10 +23,12 @@ const styles = {
       '& .pagination-bottom': {
         display: 'none',
       },
+      '& .rt-tbody .rt-tr-group': {
+        borderBottom: 0,
+      },
     },
   },
 };
-
 export default class extends React.Component {
   state = {
     users: [],
@@ -38,16 +41,19 @@ export default class extends React.Component {
   render() {
     return (
       <div className={`${css(styles.container)}`}>
-        <Logout />
-        <ReactTable
-          data={this.state.users}
-          columns={[
-            { Header: 'Username', accessor: 'userName' },
-            { Header: 'Email', accessor: 'email' },
-            { Header: 'Role', accessor: 'role' },
-            { Header: 'Status', accessor: 'status' },
-          ]}
-        />
+        <Nav />
+
+        <div className={`page-container row`}>
+          <ReactTable
+            data={this.state.users}
+            columns={[
+              { Header: 'username', accessor: 'userName' },
+              { Header: 'email', accessor: 'email' },
+              { Header: 'role', accessor: 'role' },
+              { Header: 'status', accessor: 'status' },
+            ]}
+          />
+        </div>
       </div>
     );
   }
